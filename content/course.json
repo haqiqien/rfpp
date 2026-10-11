@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "code": "MII226403",
+  "title": "Rekayasa Fitur dan Pengenalan Pola",
+  "credits": { "theory": 3, "practice": 0 },
+  "semester": "Gasal 2026/2027",
+  "program": "Magister Ilmu Komputer, FMIPA UGM",
+  "lecturers": ["Dr. Dyah Aruming Tyas, S.Si."],
+  "description": "Pengenalan pola merupakan salah satu subyek yang dibutuhkan pada Era Industri 4.0 dan Masyarakat 5.0. Rekayasa Fitur merupakan salah satu topik penting pada pengenalan pola. Aplikasi pengenalan pola meliputi, tetapi tidak terbatas pada, bidang medis (instrument medis, alat bantu interpretasi/diagnosis), industry (inspection, quality control), biometrika, multimedia information retrieval, monitoring dan kendali dimana sensor memberikan data citra, sinyal satu dimensi, sinyal audio atau video. Kuliah ini dimaksudkan untuk memberikan kemampuan pada mahasiswa untuk menguasai konsep dan teknik rekayasa fitur pada pengenalan pola sehingga mahasiswa mampu mengadaptasikan konsep dan teknik tersebut pada situasi yang dihadapi.",
+  "cpl": [
+    { "code": "CPL 2.2", "text": "[PLO2-Pengetahuan Dasar dan Teoritis] Lulusan memiliki pengetahuan dan pemahaman terhadap konsep, teori, metode, model, dan algoritma dalam bidang ilmu komputer khususnya pada sains komputasi, sistem komputer, dan analisis data." },
+    { "code": "CPL 2.3", "text": "[PLO3-Pengetahuan Terapan] Lulusan memiliki kemampuan menerapkan konsep, teori, metode, model, dan algoritma dalam pengembangan: sistem berbasis sains komputasi; sistem komputer; atau sistem analisis dan visualisasi data." },
+    { "code": "CPL 3.4", "text": "[PLO4-Keterampilan Penyelesaian Masalah] Lulusan memiliki kemampuan menganalisis dan merumuskan permasalahan sains dan teknologi bidang ilmu komputer untuk memformulasikan dan mendesain alternatif penyelesaian melalui pendekatan interdisipliner atau intr" }
+  ],
+  "cpmk": [
+    { "code": "MII226403.1", "text": "Mampu menganalisis dan mengembangkan konsep-konsep rekayasa fitur dan pengenalan pola, serta mengkaji relevansinya dalam pemecahan masalah komputasi yang kompleks melalui pendekatan riset.", "cpl": ["CPL 2.2", "CPL 2.3"], "timeAllocation": 2 },
+    { "code": "MII226403.2", "text": "Mampu merancang, mengembangkan, dan mengevaluasi metode akuisisi, prapemrosesan, ekstraksi fitur, serta model inferensi pada pengenalan pola dengan memanfaatkan pendekatan riset dan analisis kritis terhadap metode mutakhir.", "cpl": ["CPL 2.3", "CPL 3.4"], "timeAllocation": 4 },
+    { "code": "MII226403.3", "text": "Mampu merancang, mengembangkan, dan mengevaluasi metode akuisisi, pra-pemrosesan, ekstraksi fitur, dan inferensi pada data sinyal 1 dimensi, termasuk audio, serta mengintegrasikan pendekatan inter/multidisipliner untuk menghasilkan solusi inovatif.", "cpl": ["CPL 2.3", "CPL 3.4"], "timeAllocation": 1 },
+    { "code": "MII226403.4", "text": "Mampu merancang, mengembangkan, dan mengevaluasi metode akuisisi, prapemrosesan, ekstraksi fitur, dan inferensi pada data citra, serta mengkaji efektivitas pendekatan berbasis riset untuk menghasilkan model yang teruji.", "cpl": ["CPL 2.3", "CPL 3.4"], "timeAllocation": 3 },
+    { "code": "MII226403.5", "text": "Mampu merancang, mengembangkan, dan mengevaluasi metode akuisisi, prapemrosesan, ekstraksi fitur, dan inferensi pada data video, serta mengintegrasikan teknik komputasi lanjutan untuk menghasilkan sistem pengenalan pola yang inovatif dan teruji", "cpl": ["CPL 2.3", "CPL 3.4"], "timeAllocation": 1 },
+    { "code": "MII226403.6", "text": "Mampu mengkaji, merancang, dan mengembangkan solusi pengenalan pola untuk berbagai domain aplikasi, serta memecahkan permasalahan kompleks secara sistematis melalui pendekatan riset, analisis kritis, dan integrasi metode interdisipliner dan multidisipliner.", "cpl": ["CPL 3.4"], "timeAllocation": 3 }
+  ],
+  "assessment": [
+    { "basis": "Hasil Proyek (30%)", "component": "Proyek/Studi Kasus/Hasil PBL", "weight": 30, "cpmk": null },
+    { "basis": "Kognitif/Pengetahuan (70%)", "component": "Penugasan Terstruktur/Tugas", "weight": 30, "cpmk": null },
+    { "basis": "Kognitif/Pengetahuan (70%)", "component": "UTS", "weight": 20, "cpmk": null },
+    { "basis": "Kognitif/Pengetahuan (70%)", "component": "UAS", "weight": 20, "cpmk": null }
+  ],
+  "references": [
+    { "id": "ref1", "citation": "Theodoridis, S. and Koutroumbas, K., Pattern Recognition. 4th Edition, Academic Press, 2008." },
+    { "id": "ref2", "citation": "Richard O. Duda, Peter E. Hart, and David G. Stork., Pattern Classification, John Wiley & Sons, 2000." },
+    { "id": "ref3", "citation": "Bishop, C. M. Pattern Recognition and Machine Learning. Springer. 2007." },
+    { "id": "ref4", "citation": "Wladyslaw Homenda, Witold Pedrycz, Pattern Recognition: A Quality of Data Perspective, John Wiley & Sons, Inc., 2018." }
+  ]
+}

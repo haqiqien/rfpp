@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "moduleId": "p01-pengantar-pattern-recognition",
+  "passScore": 0.7,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "pilihan-ganda",
+      "prompt": "Sistem menentukan lokasi wajah di foto tanpa mengetahui identitasnya. Jenis masalah apakah ini?",
+      "options": ["Detection", "Identification", "Clustering"],
+      "answer": 0,
+      "explanation": "Pada detection, sistem mencari keberadaan dan lokasi objek tanpa harus menentukan identitasnya.",
+      "cpmk": "MII226403.1",
+      "difficulty": 1,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 3",
+      "origin": "agen"
+    },
+    {
+      "id": "q2",
+      "type": "benar-salah",
+      "prompt": "Dalam clustering pada contoh sumber, label kelompok sudah diketahui sebelum data dikelompokkan.",
+      "answer": false,
+      "explanation": "Sumber membedakan clustering sebagai pengelompokan tanpa label yang diketahui sebelumnya.",
+      "cpmk": "MII226403.1",
+      "difficulty": 1,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 3",
+      "origin": "agen"
+    },
+    {
+      "id": "q3",
+      "type": "isian",
+      "prompt": "Pada notasi sumber, apa nama kelas sebenarnya yang tidak dapat diukur langsung?",
+      "answer": ["hidden state y", "hidden state"],
+      "explanation": "Sumber menamai kelas sebenarnya yang tidak terukur langsung sebagai hidden state y.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 4",
+      "origin": "agen"
+    },
+    {
+      "id": "q4",
+      "type": "pilihan-ganda-banyak",
+      "prompt": "Pilih semua tahap yang tercantum pada alur proses di sumber.",
+      "options": ["Sensing", "Pre-processing", "Segmentasi", "Ekstraksi dan seleksi fitur", "Klasifikasi", "Post-processing", "Penyimpanan model"],
+      "answer": [0, 1, 2, 3, 4, 5],
+      "explanation": "Diagram sumber memuat sensing, pre-processing, segmentasi, ekstraksi dan seleksi fitur, klasifikasi, serta post-processing.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 5",
+      "origin": "agen"
+    },
+    {
+      "id": "q5",
+      "type": "pilihan-ganda",
+      "prompt": "Sebuah classifier menerima x dari ruang fitur X dan menaksir y dari ruang kelas Y. Notasi pemetaan yang dicantumkan sumber adalah …",
+      "options": ["q: X → Y", "q: Y → X", "x: Y → q"],
+      "answer": 0,
+      "explanation": "Sumber menuliskan tugas merancang classifier q: X → Y.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 4",
+      "origin": "agen"
+    },
+    {
+      "id": "q6",
+      "type": "pilihan-ganda",
+      "prompt": "Satu fitur menghasilkan titik dua kelas yang bercampur. Perubahan yang dicontohkan sumber agar batas keputusan lebih mudah ditarik adalah …",
+      "options": ["Menambah fitur kedua seperti width", "Menghapus semua data uji", "Membuat satu kelas baru untuk setiap titik"],
+      "answer": 0,
+      "explanation": "Pada contoh ikan, sumber membandingkan satu fitur dengan dua fitur, lightness dan width, dalam ruang 2D.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 8",
+      "origin": "agen"
+    },
+    {
+      "id": "q7",
+      "type": "isian",
+      "prompt": "Apa istilah dalam sumber untuk keadaan ketika batas keputusan yang rumit terlalu pas pada data latih?",
+      "answer": "overfitting",
+      "explanation": "Sumber menyebut risiko model yang terlalu menyesuaikan diri pada data latih sebagai overfitting.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 8",
+      "origin": "agen"
+    },
+    {
+      "id": "q8",
+      "type": "pilihan-ganda",
+      "prompt": "Dengan aturan kode biner pada sumber, berapa node keluaran minimum untuk 10 kelas?",
+      "options": ["3", "4", "10"],
+      "answer": 1,
+      "explanation": "Empat node cukup karena 2⁴ = 16 ≥ 10, sedangkan 2³ = 8 < 10.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 7",
+      "origin": "agen"
+    },
+    {
+      "id": "q9",
+      "type": "pilihan-ganda",
+      "prompt": "Pada contoh demo grid di berkas, jika selisih pola baru ke template A = 3 dan ke template B = 10, pola baru lebih mirip kelas …",
+      "options": ["B", "A", "Tidak bisa diputuskan"],
+      "answer": 1,
+      "explanation": "Sumber membandingkan banyaknya kotak berbeda; selisih yang lebih kecil menunjukkan template yang lebih mirip.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, kuis dalam berkas",
+      "origin": "agen"
+    },
+    {
+      "id": "q10",
+      "type": "pilihan-ganda",
+      "prompt": "Sifat mana yang sesuai dengan daftar fitur yang dianggap baik dalam sumber?",
+      "options": [
+        "Membedakan kelas, robust, sedikit, dan tidak saling berkorelasi",
+        "Berjumlah banyak, berkorelasi, dan peka pada variasi",
+        "Satu fitur apa pun untuk semua jenis pola"
+      ],
+      "answer": 0,
+      "explanation": "Sumber menyebut fitur yang baik membedakan kelas, robust terhadap noise/variasi, berjumlah sedikit, dan tidak saling berkorelasi.",
+      "cpmk": "MII226403.1",
+      "difficulty": 2,
+      "source": "sources/pertemuan-01/1.belajar-pattern-recognition.html, bagian 5",
+      "origin": "agen"
+    }
+  ]
+}
+

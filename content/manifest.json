@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "modules": [
+    {
+      "id": "p01-pengantar-pattern-recognition",
+      "title": "Pengantar Pattern Recognition",
+      "summary": "Pengantar tentang konsep pola, masalah pengenalan, proses, pendekatan, dan contoh aplikasi pengenalan pola.",
+      "path": "modules/p01-pengantar-pattern-recognition",
+      "cpmk": [
+        "MII226403.1"
+      ],
+      "order": 1,
+      "status": "terbit",
+      "tags": [
+        "pattern-recognition",
+        "konsep"
+      ],
+      "estimatedMinutes": 25,
+      "hasQuiz": true,
+      "added": "2026-10-11"
+    }
+  ]
+}

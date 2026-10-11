@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "terms": [
+    {
+      "id": "pattern",
+      "term": "Pola",
+      "en": "Pattern",
+      "definition": "Objek, proses, atau kejadian yang dapat diberi nama; dalam praktik berupa sekumpulan hasil pengukuran yang menggambarkan objek.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "pattern-class",
+      "term": "Kelas pola",
+      "en": "Pattern class",
+      "definition": "Kelompok pola yang memiliki atribut mirip.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "pattern-recognition",
+      "term": "Pengenalan pola",
+      "en": "Pattern recognition",
+      "definition": "Teori, algoritma, dan sistem untuk memasukkan pola ke kategori atau kelas.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "detection",
+      "term": "Detection",
+      "definition": "Masalah untuk menemukan apakah objek ada dan menentukan lokasinya.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "clustering",
+      "term": "Clustering",
+      "definition": "Pengelompokan pola berdasarkan kemiripan saat label kelompok belum diketahui.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "classification",
+      "term": "Classification",
+      "definition": "Penentuan kategori untuk pola saat kelas yang dituju sudah diketahui.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "feature-vector",
+      "term": "Vektor fitur",
+      "en": "Feature vector",
+      "definition": "Hasil pengukuran yang direpresentasikan sebagai satu titik di ruang fitur.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "hidden-state",
+      "term": "Hidden state",
+      "definition": "Kelas sebenarnya yang tidak dapat diukur langsung pada notasi dalam sumber.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    },
+    {
+      "id": "overfitting",
+      "term": "Overfitting",
+      "definition": "Risiko ketika batas keputusan yang rumit terlalu menyesuaikan diri pada data latih.",
+      "modules": [
+        "p01-pengantar-pattern-recognition"
+      ]
+    }
+  ]
+}

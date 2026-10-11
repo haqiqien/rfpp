@@ -1,0 +1,10 @@
+<svg viewBox="0 0 640 150" role="img" aria-label="Classification versus clustering">
+<rect x="5" y="5" width="300" height="140" rx="8" fill="#fff" stroke="#14206b"/>
+<text x="155" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#14206b">Classification (supervised)</text>
+<g font-size="22"><text x="30" y="70" fill="#14206b">A</text><text x="60" y="95" fill="#14206b">A</text><text x="95" y="65" fill="#b3261e">B</text><text x="40" y="125" fill="#b3261e">B</text></g>
+<text x="190" y="75" font-size="13">Label "A" dan "B"</text><text x="190" y="95" font-size="13">sudah diberikan</text>
+<rect x="335" y="5" width="300" height="140" rx="8" fill="#fff" stroke="#14206b"/>
+<text x="485" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#14206b">Clustering (unsupervised)</text>
+<g font-size="22" fill="#555"><text x="360" y="70">1</text><text x="390" y="95">|</text><text x="420" y="65">1</text><text x="370" y="125">/</text></g>
+<text x="500" y="75" font-size="13">Sistem membentuk</text><text x="500" y="95" font-size="13">"kelompok 1, 2" sendiri</text>
+</svg>

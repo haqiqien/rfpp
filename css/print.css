@@ -1,0 +1,7 @@
+.site-header, .site-footer, .skip-link, .header-actions, .primary-nav, button { display:none!important; }
+body { background:white; color:black; font-size:12pt; }
+#app { max-width:none; padding:0; }
+.module-body { max-width:none; }
+a { color:inherit; }
+.card, .callout { box-shadow:none; break-inside:avoid; }
+img, table, pre { break-inside:avoid; }

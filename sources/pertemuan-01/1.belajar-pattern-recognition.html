@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belajar Pattern Recognition</title>
+<style>
+:root{--navy:#14206b;--gold:#f5b82e;--bg:#fbfaf6;--ink:#1d2033;--mute:#5b607a;--card:#fff;--line:#dcdbe6;--ok:#1e7d4f;--bad:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.7 "Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--navy);color:#fff;padding:48px 20px 40px;border-bottom:8px solid var(--gold)}
+header div,main,nav div{max-width:920px;margin:auto}
+h1{font:700 2.3rem/1.2 Georgia,serif;margin:0 0 10px}
+header p{margin:0;color:#d6d9f2}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:5}
+nav div{display:flex;gap:4px;overflow-x:auto;padding:8px 12px}
+nav a{white-space:nowrap;color:var(--navy);text-decoration:none;padding:6px 12px;border-radius:6px;font-size:.92rem}
+nav a:hover,nav a:focus-visible{background:#eceefa;outline:2px solid var(--gold)}
+main{padding:10px 20px 60px}
+section{padding-top:36px}
+h2{font:700 1.7rem/1.3 Georgia,serif;color:var(--navy);margin:0 0 12px;border-left:6px solid var(--gold);padding-left:12px}
+h3{font-size:1.12rem;margin:22px 0 6px;color:var(--navy)}
+p{margin:8px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:14px 0}
+.def{border-left:5px solid var(--navy)}
+.crit{background:#fff6dd;border:1px solid #ecd48a;border-left:5px solid var(--gold)}
+.crit b:first-child{color:#7a5600}
+.eg{background:#eef7f1;border-color:#bfdcc9}
+table{border-collapse:collapse;width:100%;font-size:.95rem;background:#fff}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff}
+.tw{overflow-x:auto;margin:12px 0}
+svg{max-width:100%;height:auto;display:block;margin:10px auto}
+button{font:inherit;cursor:pointer;border:1px solid var(--navy);background:#fff;color:var(--navy);padding:6px 14px;border-radius:6px}
+button:hover{background:#eceefa}
+button:focus-visible{outline:3px solid var(--gold)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tabs button[aria-selected=true]{background:var(--navy);color:#fff}
+.panel[hidden]{display:none}
+.grid{display:grid;grid-template-columns:repeat(4,44px);gap:3px;margin:8px 0}
+.grid span{width:44px;height:44px;border:1px solid #999;display:grid;place-items:center;font-size:.85rem;background:#fff}
+.grid span.on{background:#111;color:#fff}
+.grid.me span{cursor:pointer}
+.flex{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.res{font-weight:600;margin-top:8px}
+input[type=range]{width:100%;accent-color:var(--navy)}
+.q{margin:16px 0}
+.q label{display:block;padding:6px 10px;border:1px solid var(--line);border-radius:6px;margin:5px 0;background:#fff;cursor:pointer}
+.q label:hover{background:#f3f4fb}
+.fb{font-size:.95rem;margin-top:4px}
+.ok{color:var(--ok)}.no{color:var(--bad)}
+details{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:600;color:var(--navy)}
+footer{text-align:center;color:var(--mute);padding:24px;font-size:.9rem}
+@media(max-width:600px){h1{font-size:1.7rem}body{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div>
+<h1>Pengantar Pattern Recognition</h1>
+<p>Panduan belajar dari slide kuliah Prof. Agus Harjoko &amp; Dr. Dyah Aruming Tyas (DCSE/DIKE, UGM). Dijelaskan dengan bahasa sederhana, lengkap dengan catatan kritis, demo interaktif, dan kuis.</p>
+</div></header>
+<nav><div>
+<a href="#konsep">1 Konsep</a><a href="#data">2 Data &amp; aplikasi</a><a href="#masalah">3 Jenis masalah</a><a href="#belajar">4 Cara mesin belajar</a><a href="#proses">5 Alur proses</a><a href="#pendekatan">6 Empat pendekatan</a><a href="#nn">7 Neural network</a><a href="#ikan">8 Studi kasus ikan</a><a href="#kuis">9 Kuis</a>
+</div></nav>
+<main>
+
+<section id="konsep">
+<h2>1. Konsep dasar</h2>
+<div class="box def"><b>Pola (pattern)</b> adalah objek, proses, atau kejadian yang bisa diberi nama. Dalam praktik, pola berupa <b>sekumpulan hasil pengukuran</b> yang menggambarkan sebuah objek: angka tulisan tangan, sidik jari, wajah, iris mata, tanda tangan, atau sinyal suara.</div>
+<div class="box def"><b>Kelas pola (pattern class)</b> adalah kelompok pola yang punya atribut mirip. Huruf "A" dalam ratusan font berbeda tetap satu kelas: "A". Mengenali berarti memasukkan sebuah objek ke salah satu kelas.</div>
+<div class="box def"><b>Pattern recognition</b> adalah teori, algoritma, dan sistem untuk memasukkan pola ke sebuah kategori: mengelompokkan data yang rumit/acak, menghubungkannya dengan pola yang sudah dikenal, dan membedakan satu objek dari objek lain.</div>
+<h3>Analogi sehari-hari</h3>
+<p>Manusia mengenali wajah teman, memahami ucapan, membaca tulisan tangan, bahkan membedakan makanan dari baunya, tanpa berpikir. Tujuan bidang ini: <b>membuat mesin yang punya kemampuan serupa</b>.</p>
+<h3>Machine Learning vs Pattern Recognition</h3>
+<p>Slide menyebut keduanya <i>bidang yang sama dengan sudut pandang berbeda</i>: ML lahir dari ilmu komputer, PR lahir dari teknik (engineering). Keduanya sama-sama ingin membuat sistem pengolah informasi berkinerja tinggi.</p>
+<div class="box crit"><b>Catatan kritis:</b> Pernyataan "sama saja" itu penyederhanaan. Secara historis PR lebih menekankan fitur dan teori keputusan statistik, sedangkan ML lebih menekankan algoritma yang belajar dari data. Hari ini batasnya makin kabur, tapi jangan heran kalau buku PR dan buku ML memakai istilah berbeda untuk hal yang sama (misalnya "feature" vs "attribute").</div>
+<h3>Definisi belajar yang rapi (well-posed learning problem)</h3>
+<p>Program dikatakan belajar dari pengalaman <b>E</b> untuk tugas <b>T</b> dengan ukuran kinerja <b>P</b>, jika kinerjanya pada T (diukur dengan P) membaik karena E.</p>
+<div class="box eg"><b>Contoh:</b> T = mengenali angka tulisan tangan; E = 60.000 gambar angka berlabel; P = persentase tebakan yang benar. Jika akurasi naik setelah diberi lebih banyak gambar, program itu "belajar".</div>
+<div class="box crit"><b>Catatan kritis:</b> Tanpa P yang jelas, kata "belajar" tidak bisa dibuktikan. Pilih P dengan hati-hati: akurasi 99% terlihat bagus, tapi menyesatkan jika 99% data adalah satu kelas saja.</div>
+</section>
+
+<section id="data">
+<h2>2. Jenis data dan contoh aplikasi</h2>
+<div class="tw"><table>
+<tr><th>Jenis data</th><th>Contoh tugas di slide</th></tr>
+<tr><td>Teks</td><td>Klasifikasi dokumen, clustering dokumen</td></tr>
+<tr><td>Sinyal 1D (audio)</td><td>Identifikasi pembicara, pengenalan suara, deteksi TBC</td></tr>
+<tr><td>Citra 2D</td><td>Deteksi wajah, identifikasi sidik jari, deteksi talasemia, klasifikasi fase malaria</td></tr>
+<tr><td>Video ("3D")</td><td>Pelacakan kendaraan, pengenalan plat nomor</td></tr>
+</table></div>
+<div class="box crit"><b>Catatan kritis:</b> Slide menyebut video sebagai "3D" (2 dimensi gambar + waktu). Itu berbeda dengan data 3D spasial seperti point cloud. Ingat juga: "deteksi TBC" lewat suara adalah contoh yang masih berupa riset, bukan alat diagnosis yang siap pakai.</div>
+<h3>Tabel aplikasi (diringkas dari slide)</h3>
+<div class="tw"><table>
+<tr><th>Bidang</th><th>Aplikasi</th><th>Masukan</th><th>Kelas keluaran</th></tr>
+<tr><td>Bioinformatika</td><td>Analisis sekuens</td><td>Sekuens DNA/protein</td><td>Jenis gen/pola yang dikenal</td></tr>
+<tr><td>Data mining</td><td>Mencari pola bermakna</td><td>Titik di ruang multidimensi</td><td>Cluster padat &amp; terpisah baik</td></tr>
+<tr><td>Klasifikasi dokumen</td><td>Pencarian internet</td><td>Dokumen teks</td><td>Kategori semantik (bisnis, olahraga)</td></tr>
+<tr><td>Analisis citra dokumen</td><td>Mesin baca untuk tunanetra</td><td>Citra dokumen</td><td>Huruf, angka, kata</td></tr>
+<tr><td>Otomasi industri</td><td>Inspeksi PCB</td><td>Citra intensitas/jarak</td><td>Cacat / tidak cacat</td></tr>
+<tr><td>Biometrik</td><td>Identifikasi pribadi</td><td>Wajah, iris, sidik jari</td><td>Pengguna sah</td></tr>
+<tr><td>Penginderaan jauh</td><td>Prakiraan hasil panen</td><td>Citra multispektral</td><td>Tata guna lahan, pola tumbuh</td></tr>
+<tr><td>Pengenalan suara</td><td>Info telepon tanpa operator</td><td>Gelombang suara</td><td>Kata yang diucapkan</td></tr>
+<tr><td>Diagnostik</td><td>Skrining medis</td><td>X-ray, EKG, sel darah</td><td>Normal / anomali</td></tr>
+<tr><td>OCR</td><td>Sortir kode pos, digitalisasi</td><td>Citra/video</td><td>Karakter, kalimat</td></tr>
+<tr><td>Militer &amp; surveilans</td><td>Pengenalan target, pemantauan</td><td>Sinyal, citra udara, video</td><td>Target/objek, jenis, kecepatan</td></tr>
+</table></div>
+<div class="box crit"><b>Catatan kritis:</b> Pola umumnya sama di semua baris: <i>masukan mentah &rarr; fitur &rarr; kelas</i>. Perhatikan juga dampak etisnya: biometrik, surveilans, dan militer memunculkan isu privasi, bias, dan salah identifikasi. Di bidang medis, salah tebak "normal" (false negative) jauh lebih berbahaya daripada salah tebak "anomali".</div>
+</section>
+
+<section id="masalah">
+<h2>3. Empat jenis masalah</h2>
+<div class="tw"><table>
+<tr><th>Jenis</th><th>Pertanyaan yang dijawab</th><th>Label kelas?</th><th>Contoh</th></tr>
+<tr><td>Detection</td><td>Apakah objeknya ada, dan di mana?</td><td>Tidak perlu</td><td>Kotak di sekitar wajah</td></tr>
+<tr><td>Clustering</td><td>Mana yang mirip satu sama lain?</td><td>Tidak diketahui (kelas "pertama", "kedua")</td><td>Mengelompokkan foto tanpa tahu siapa</td></tr>
+<tr><td>Classification</td><td>Masuk kategori yang mana?</td><td>Diketahui</td><td>Pria vs wanita; huruf A vs B</td></tr>
+<tr><td>Identification / Verification</td><td>Siapa persisnya? / Benarkah dia orang ini?</td><td>Identitas individu</td><td>"Jane Doe, 26, F"</td></tr>
+</table></div>
+<svg viewBox="0 0 640 150" role="img" aria-label="Classification versus clustering">
+<rect x="5" y="5" width="300" height="140" rx="8" fill="#fff" stroke="#14206b"/>
+<text x="155" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#14206b">Classification (supervised)</text>
+<g font-size="22"><text x="30" y="70" fill="#14206b">A</text><text x="60" y="95" fill="#14206b">A</text><text x="95" y="65" fill="#b3261e">B</text><text x="40" y="125" fill="#b3261e">B</text></g>
+<text x="190" y="75" font-size="13">Label "A" dan "B"</text><text x="190" y="95" font-size="13">sudah diberikan</text>
+<rect x="335" y="5" width="300" height="140" rx="8" fill="#fff" stroke="#14206b"/>
+<text x="485" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#14206b">Clustering (unsupervised)</text>
+<g font-size="22" fill="#555"><text x="360" y="70">1</text><text x="390" y="95">|</text><text x="420" y="65">1</text><text x="370" y="125">/</text></g>
+<text x="500" y="75" font-size="13">Sistem membentuk</text><text x="500" y="95" font-size="13">"kelompok 1, 2" sendiri</text>
+</svg>
+<h3>Latihan kasus dari slide</h3>
+<details><summary>Case #1: foto keluarga dengan kotak di wajah</summary>Jawaban: <b>Detection</b>. Sistem hanya menemukan lokasi wajah, tanpa tahu siapa mereka.</details>
+<details><summary>Case #2: tumpukan foto dibagi jadi dua kelompok tanpa nama</summary>Jawaban: <b>Clustering</b>. Foto dikelompokkan berdasarkan kemiripan tanpa label yang diberikan sebelumnya.</details>
+<details><summary>Case #3: foto yang sama dibagi dengan label "Women" dan "Men"</summary>Jawaban: <b>Classification</b>. Kategorinya sudah ditentukan dan diberi nama.</details>
+<details><summary>Case #4: A (nama + usia + gender) vs B (hanya kotak hijau)</summary>Jawaban: A = <b>Face identification</b>, B = <b>Face detection</b>.</details>
+<div class="box crit"><b>Catatan kritis:</b> Perbedaan Case #2 dan #3 hanya ada pada <i>apakah label diketahui</i>, bukan pada gambarnya. Verification (1:1, "apakah ini Budi?") berbeda dari identification (1:N, "ini siapa di antara semua orang?"); slide menggabungkannya. Selain itu, mengklasifikasikan gender dari wajah adalah contoh yang kontroversial: gender tidak selalu terbaca dari tampilan fisik, dan model semacam ini terbukti bisa bias.</div>
+</section>
+
+<section id="belajar">
+<h2>4. Bagaimana mesin belajar</h2>
+<h3>Dua fase sistem</h3>
+<p><b>Training</b>: banyak sampel dipelajari untuk menentukan fitur apa yang dipakai dan bagaimana cara mengklasifikasi. <b>Recognition</b>: pada data baru, fitur diekstrak lalu kelas ditentukan. Analogi: training = belajar untuk ujian, recognition = mengerjakan soal ujian baru.</p>
+<div class="tw"><table>
+<tr><th></th><th>Supervised</th><th>Unsupervised</th></tr>
+<tr><td>Data latih</td><td>Punya label/nilai dari manusia</td><td>Tanpa label</td></tr>
+<tr><td>Hasil</td><td>Classifier</td><td>Cluster/grup</td></tr>
+<tr><td>Masalah terkait</td><td>Classification</td><td>Clustering</td></tr>
+</table></div>
+<h3>Konsep matematis inti</h3>
+<ul>
+<li><b>Vektor fitur x &isin; X</b>: hasil pengukuran, satu titik di ruang fitur. Contoh: (tinggi, berat) = (165, 52).</li>
+<li><b>Hidden state y &isin; Y</b>: kelas sebenarnya yang <i>tidak bisa diukur langsung</i>. Pola dengan hidden state sama berada di kelas yang sama.</li>
+<li><b>Tugas:</b> merancang classifier <b>q: X &rarr; Y</b>, aturan yang menebak y dari x.</li>
+</ul>
+<div class="box eg"><b>Contoh slide, pengenalan joki:</b> fitur = tinggi &amp; berat (ruang R&sup2;), kelas Y = {H (bukan joki), J (joki)}. Classifier linear: q(x) = J jika (w·x)+b &lt; 0, dan H jika (w·x)+b &ge; 0. Garis (w·x)+b = 0 memisahkan dua kumpulan titik. Membesar bobot w dan konstanta b adalah hasil "belajar" dari data latih.</div>
+<div class="box crit"><b>Catatan kritis:</b> Classifier linear hanya bekerja jika kelas bisa dipisah garis lurus. Jika data bercampur (lihat "bad features" di studi kasus ikan), garis apa pun akan salah. Jawabannya bukan hanya model yang lebih rumit, tapi sering <i>fitur yang lebih baik</i>.</div>
+<h3>Siklus desain</h3>
+<p>Kumpulkan data (latih &amp; uji) &rarr; tentukan fitur &rarr; kembangkan model &rarr; training &rarr; evaluasi. Siklus ini <b>berulang</b>: hasil evaluasi buruk biasanya membuat Anda kembali mengubah fitur atau data.</p>
+<div class="box crit"><b>Catatan kritis:</b> Evaluasi harus memakai data yang <i>tidak dipakai saat training</i>. Kalau tidak, akurasi tinggi hanya berarti model menghafal.</div>
+</section>
+
+<section id="proses">
+<h2>5. Alur proses pengenalan pola</h2>
+<svg viewBox="0 0 700 120" role="img" aria-label="Alur proses pattern recognition">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#14206b"/></marker></defs>
+<g font-size="12" text-anchor="middle" fill="#fff">
+<rect x="4" y="30" width="90" height="50" rx="6" fill="#f08a24"/><text x="49" y="60">Sensing</text>
+<rect x="124" y="30" width="90" height="50" rx="6" fill="#f08a24"/><text x="169" y="60">Pre-processing</text>
+<rect x="244" y="30" width="90" height="50" rx="6" fill="#2e9fbf"/><text x="289" y="60">Segmentasi</text>
+<rect x="364" y="30" width="90" height="50" rx="6" fill="#6c4f9c"/><text x="409" y="55">Ekstraksi</text><text x="409" y="70">&amp; seleksi fitur</text>
+<rect x="484" y="30" width="90" height="50" rx="6" fill="#6b9a3a"/><text x="529" y="60">Klasifikasi</text>
+<rect x="604" y="30" width="92" height="50" rx="6" fill="#b3463f"/><text x="650" y="55">Post-</text><text x="650" y="70">processing</text></g>
+<g stroke="#14206b" stroke-width="2" marker-end="url(#ar)"><path d="M94 55H122"/><path d="M214 55H242"/><path d="M334 55H362"/><path d="M454 55H482"/><path d="M574 55H602"/></g>
+<text x="350" y="105" text-anchor="middle" font-size="12" fill="#5b607a">input &rarr; keputusan</text>
+</svg>
+<div class="tw"><table>
+<tr><th>Tahap</th><th>Tugas</th><th>Contoh</th></tr>
+<tr><td>Sensing / akuisisi</td><td>Mengambil data mentah</td><td>Posisi kamera, kalibrasi, pencahayaan</td></tr>
+<tr><td>Pre-processing</td><td>Membersihkan &amp; menyeragamkan</td><td>Filter noise; normalisasi ukuran dan intensitas</td></tr>
+<tr><td>Segmentasi</td><td>Memisahkan objek (RoI) dari latar/objek lain</td><td>Berbasis batas, thresholding, wilayah, gerak</td></tr>
+<tr><td>Ekstraksi fitur</td><td>Mengubah objek jadi angka/representasi baru</td><td>Warna, bentuk, tekstur, spektrum, term frequency</td></tr>
+<tr><td>Seleksi fitur</td><td>Memilih fitur yang paling informatif</td><td>PCA, information gain</td></tr>
+<tr><td>Matching / klasifikasi</td><td>Menentukan kelas</td><td>Cosine, jarak Euclidean &amp; Mahalanobis, korelasi, string matching</td></tr>
+<tr><td>Post-processing</td><td>Mengukur kinerja / memperbaiki keputusan</td><td>Akurasi, tingkat kesalahan</td></tr>
+</table></div>
+<h3>Fitur yang baik</h3>
+<p>Fitur ideal: <b>membedakan</b> kelas, <b>robust</b> (tahan noise/variasi), <b>jumlahnya sedikit</b>, dan <b>tidak saling berkorelasi</b> (agar tidak berulang menghitung hal yang sama). Prinsip seleksi: "tidak terlalu sedikit, tidak terlalu banyak".</p>
+<h3>Mengukur kemiripan</h3>
+<ul>
+<li><b>Euclidean</b>: jarak garis lurus; sederhana tapi sensitif terhadap skala fitur.</li>
+<li><b>Mahalanobis</b>: jarak yang memperhitungkan sebaran dan korelasi antar fitur, jadi lebih adil jika fitur berbeda skala.</li>
+<li><b>Cosine</b>: mengukur sudut antar vektor, cocok untuk teks (arah lebih penting dari panjang).</li>
+</ul>
+<div class="box crit"><b>Catatan kritis:</b> Tahap awal (sensing, pre-processing, segmentasi) sering menentukan hasil lebih besar daripada algoritma klasifikasi. Kesalahan di segmentasi akan merambat ke semua tahap berikutnya ("garbage in, garbage out"). Slide menggambar alur satu arah, padahal nyatanya ada umpan balik: hasil klasifikasi buruk membuat kita mengubah tahap sebelumnya.</div>
+</section>
+
+<section id="pendekatan">
+<h2>6. Empat pendekatan utama</h2>
+<div class="tw"><table>
+<tr><th>Pendekatan</th><th>Representasi</th><th>Fungsi pengenalan</th><th>Kriteria khas</th></tr>
+<tr><td>Template matching</td><td>Sampel, piksel, kurva</td><td>Korelasi, ukuran jarak</td><td>Classification error</td></tr>
+<tr><td>Statistical</td><td>Fitur</td><td>Fungsi diskriminan</td><td>Classification error</td></tr>
+<tr><td>Syntactic / structural</td><td>Primitif</td><td>Aturan, grammar</td><td>Acceptance error</td></tr>
+<tr><td>Neural network</td><td>Sampel, piksel, fitur</td><td>Fungsi jaringan</td><td>Mean square error</td></tr>
+</table></div>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-p="p1">Template matching</button>
+<button role="tab" aria-selected="false" data-p="p2">Statistical</button>
+<button role="tab" aria-selected="false" data-p="p3">Syntactic</button>
+</div>
+
+<div class="panel" id="p1">
+<h3>Template matching</h3>
+<p>Ide: simpan contoh ideal (template), lalu geser/bandingkan ke data baru. Jika korelasi tinggi atau jarak kecil, dianggap cocok. Pada deteksi wajah, jendela digeser ke seluruh gambar, sehingga muncul banyak kotak yang tumpang tindih; kotak-kotak itu <b>digabung</b> jadi satu (seperti pada contoh Mona Lisa di slide).</p>
+<div class="box crit"><b>Catatan kritis:</b> Mudah dipahami, tapi rapuh: wajah miring, ukuran berbeda, atau cahaya lain bisa gagal cocok. Perlu banyak template untuk menutup variasi, sehingga lambat.</div>
+</div>
+
+<div class="panel" id="p2" hidden>
+<h3>Statistical</h3>
+<p>Tiap pola jadi <b>vektor fitur</b> (satu titik di ruang multidimensi). Tiap kelas punya sebaran statistik berbeda, lalu diputuskan dengan teori keputusan. Slide memberi dua contoh.</p>
+<h3>Demo 1: bandingkan grid per grid</h3>
+<p>Klik kotak di grid "Huruf baru" untuk mengubah 0/1. Jumlah kotak yang berbeda dihitung terhadap template A dan B. <b>Makin kecil selisih, makin mirip.</b> (Nilai awal = A tulisan tangan dari slide.)</p>
+<div class="flex">
+<div><b>Template A</b><div class="grid" id="gA"></div></div>
+<div><b>Template B</b><div class="grid" id="gB"></div></div>
+<div><b>Huruf baru (klik)</b><div class="grid me" id="gM"></div></div>
+</div>
+<div class="res" id="gres"></div>
+<div class="box crit"><b>Catatan kritis:</b> Pada slide, huruf tulisan tangan lawan A font beda 3 kotak, lawan B beda 10, jadi dikenali A. Tetapi geser huruf satu kotak saja dan hitungannya bisa berubah drastis. Karena itu fitur harus <i>tidak peka pada posisi dan ukuran</i>, atau datanya dinormalisasi lebih dulu.</div>
+<h3>Demo 2: jeruk atau apel dari diameter</h3>
+<p>Dua kurva = peluang diameter untuk tiap buah, <i>p(diameter | jeruk)</i> dan <i>p(diameter | apel)</i>. Aturan: pilih kelas dengan peluang lebih besar. Geser diameter:</p>
+<input type="range" id="dia" min="2" max="12" step="0.1" value="5.5" aria-label="Diameter dalam cm">
+<svg id="gs" viewBox="0 0 600 220" role="img" aria-label="Kurva peluang jeruk dan apel"></svg>
+<div class="res" id="gsr"></div>
+<div class="box crit"><b>Catatan kritis:</b> Kurva di sini ilustrasi (jeruk rata-rata 6 cm, apel 8,5 cm, sebaran 1,2). Di daerah kedua kurva berpotongan, keputusan pasti kadang salah, dan itu <i>tidak bisa dihindari</i> dengan satu fitur. Slide mengabaikan <b>prior</b> (seberapa sering tiap buah muncul) dan <b>biaya salah</b>; teori keputusan Bayes memasukkan keduanya.</div>
+</div>
+
+<div class="panel" id="p3" hidden>
+<h3>Syntactic / structural</h3>
+<p>Pola dipandang seperti kalimat. Tentukan <b>primitif</b> (potongan dasar, misalnya segmen garis dengan arah tertentu) dan hubungan antar primitif, lalu susun <b>grammar</b>. Kelas ditentukan dari aturan produksi: pola yang bisa "dihasilkan" grammar kelas itu diterima.</p>
+<p>Contoh slide: telusuri kontur objek dengan garis tersambung, beri kode tiap segmen (<b>chain code</b>), sehingga bentuk menjadi untaian simbol.</p>
+<svg viewBox="0 0 420 120" role="img" aria-label="Contoh chain code">
+<g stroke="#14206b" stroke-width="3" fill="none"><path d="M40 90H120V40H200"/></g>
+<g font-size="14" fill="#b3261e" text-anchor="middle"><text x="80" y="110">0 (kanan)</text><text x="132" y="68">2 (atas)</text><text x="160" y="30">0 (kanan)</text></g>
+<text x="300" y="60" font-size="14">Kode: 0 &ndash; 2 &ndash; 0</text><text x="300" y="82" font-size="12" fill="#5b607a">(arah: 0 kanan, 2 atas)</text></svg>
+<div class="box crit"><b>Catatan kritis:</b> Dekat dengan cara manusia memahami bentuk dan baik untuk struktur kompleks, tetapi sulit jika ada noise: satu garis salah deteksi bisa membuat kode tak cocok grammar mana pun. Itu sebabnya pendekatan statistik "relatif lebih mudah diimplementasikan". Primitif di sini mirip fitur di pendekatan statistik.</div>
+</div>
+</section>
+
+<section id="nn">
+<h2>7. Pendekatan neural network</h2>
+<p>Klasifikasi berdasarkan model neuron manusia: banyak unit sederhana berlapis, bobot antar unit dipelajari dari data. Langkah: bangun model &rarr; ekstrak fitur (jika perlu) &rarr; latih untuk mendapat bobot terbaik &rarr; uji dan terapkan.</p>
+<div class="tw"><table>
+<tr><th>Contoh</th><th>Susunan</th><th>Keterangan</th></tr>
+<tr><td>1</td><td>Pre-processing &rarr; segmentasi &rarr; ekstraksi &rarr; seleksi fitur &rarr; MLP</td><td>Fitur dibuat manual; jaringan hanya mencocokkan. Node input = jumlah fitur.</td></tr>
+<tr><td>2</td><td>Pre-processing &rarr; segmentasi &rarr; <b>lapisan konvolusi &amp; pooling</b> &rarr; MLP</td><td>Fitur diekstrak dan diseleksi otomatis oleh CNN.</td></tr>
+<tr><td>3</td><td><b>Konvolusi &amp; pooling</b> &rarr; MLP</td><td>Jika data bagus dan satu objek per data, pre-processing dan segmentasi dibuang.</td></tr>
+</table></div>
+<h3>Berapa node output?</h3>
+<p>Slide: jumlah output = C (satu node per kelas) atau n node dengan <b>2<sup>n</sup> &ge; C</b> (kode biner). Contoh: 10 kelas angka &rarr; n = 4 karena 2<sup>4</sup> = 16 &ge; 10.</p>
+<div class="box crit"><b>Catatan kritis:</b> Contoh 1&rarr;3 menunjukkan tren: semakin banyak langkah buatan manusia digantikan jaringan. Harganya: butuh data jauh lebih banyak, hasilnya sulit dijelaskan ("kotak hitam"), dan bisa gagal jika data latih tidak mewakili kondisi nyata. Kode biner untuk output hemat node, tapi biasanya satu node per kelas lebih mudah dilatih dan dibaca. Kriteria "mean square error" di tabel juga hanya salah satu pilihan; untuk klasifikasi, banyak model modern memakai cross-entropy.</div>
+</section>
+
+<section id="ikan">
+<h2>8. Studi kasus: klasifikasi ikan salmon vs sea bass</h2>
+<p><b>Masalah:</b> ikan lewat di ban berjalan; mesin harus menentukan jenisnya. Fitur apa yang cukup membedakan?</p>
+<div class="tw"><table>
+<tr><th>Tahap</th><th>Yang dikerjakan / risiko</th></tr>
+<tr><td>Akuisisi</td><td>Kamera, kalibrasi, posisi, lampu. Masalah: pencahayaan berubah, posisi ikan acak, noise kamera.</td></tr>
+<tr><td>Pre-processing</td><td>Perbaiki kualitas gambar, hilangkan noise, transformasi citra.</td></tr>
+<tr><td>Segmentasi</td><td>Pisahkan ikan yang bertumpuk dari latar dan satu sama lain.</td></tr>
+<tr><td>Fitur</td><td>Panjang, kecerahan (lightness), lebar, jumlah dan bentuk sirip, posisi mulut.</td></tr>
+</table></div>
+<h3>Satu fitur vs dua fitur</h3>
+<svg viewBox="0 0 640 230" role="img" aria-label="Fitur baik dan fitur buruk">
+<g fill="none" stroke="#999"><rect x="5" y="5" width="300" height="200" rx="6"/><rect x="335" y="5" width="300" height="200" rx="6"/></g>
+<g fill="#b3261e"><circle cx="50" cy="60" r="5"/><circle cx="70" cy="95" r="5"/><circle cx="45" cy="130" r="5"/><circle cx="90" cy="115" r="5"/><circle cx="75" cy="160" r="5"/><circle cx="110" cy="75" r="5"/><circle cx="105" cy="145" r="5"/></g>
+<g fill="#14206b"><circle cx="210" cy="50" r="5"/><circle cx="245" cy="85" r="5"/><circle cx="225" cy="125" r="5"/><circle cx="270" cy="60" r="5"/><circle cx="260" cy="115" r="5"/><circle cx="195" cy="100" r="5"/><circle cx="240" cy="155" r="5"/></g>
+<path d="M165 15L145 190" stroke="#222" stroke-width="2"/>
+<text x="155" y="224" text-anchor="middle" font-size="13" font-weight="700">Fitur baik: dipisah garis</text>
+<g fill="#b3261e"><circle cx="400" cy="70" r="5"/><circle cx="470" cy="110" r="5"/><circle cx="430" cy="140" r="5"/><circle cx="520" cy="80" r="5"/><circle cx="490" cy="150" r="5"/><circle cx="560" cy="120" r="5"/></g>
+<g fill="#14206b"><circle cx="440" cy="85" r="5"/><circle cx="500" cy="100" r="5"/><circle cx="410" cy="125" r="5"/><circle cx="540" cy="140" r="5"/><circle cx="470" cy="70" r="5"/><circle cx="580" cy="90" r="5"/></g>
+<text x="485" y="224" text-anchor="middle" font-size="13" font-weight="700">Fitur buruk: kelas bercampur</text>
+</svg>
+<p>Satu fitur (misalnya hanya lightness) sering kurang. Dua fitur (lightness dan width) membuat titik tersebar di bidang 2D sehingga batas keputusan lebih mudah ditarik.</p>
+<h3>Model rumit vs sederhana</h3>
+<p>Garis lurus, kurva halus, dan kurva berliku-liku bisa memisahkan data latih. Semakin rumit batasnya, semakin pas ke data latih; tetapi belum tentu pas pada ikan baru.</p>
+<div class="box crit"><b>Catatan kritis:</b> Inilah <b>overfitting</b>: model menghafal noise data latih. Slide hanya menyebut "model rumit &rarr; batas rumit". Ingat aturannya: pilih model paling sederhana yang kinerjanya cukup pada <i>data uji</i>. Isu fitur yang disebut slide: fitur berkorelasi tinggi tidak menambah informasi, ekstraksi bisa mahal secara komputasi, fitur bisa hilang (misalnya sirip rusak), dan sering butuh pengetahuan domain (ahli perikanan).</div>
+</section>
+
+<section id="kuis">
+<h2>9. Kuis latihan</h2>
+<p>Pilih jawaban, penjelasan muncul langsung.</p>
+<div id="quiz"></div>
+<button id="reset">Ulangi kuis</button> <span id="score" class="res"></span>
+</section>
+
+<section>
+<h2>Ringkasan 1 menit</h2>
+<ul>
+<li>Pola = pengukuran yang menggambarkan objek; kelas = kelompok pola yang mirip.</li>
+<li>Empat masalah: detection, clustering, classification, identification.</li>
+<li>Supervised pakai label, unsupervised tidak.</li>
+<li>Alur: sensing &rarr; pre-processing &rarr; segmentasi &rarr; fitur &rarr; klasifikasi &rarr; evaluasi.</li>
+<li>Empat pendekatan: template, statistik, sintaktik, neural network. Fitur yang baik menentukan banyak hal.</li>
+<li>Waspadai overfitting, data latih yang tidak mewakili, dan bias.</li>
+</ul>
+</section>
+</main>
+<footer>Dibuat dari slide "Introduction to Pattern Recognition", Universitas Gadjah Mada. Contoh angka pada demo bersifat ilustrasi.</footer>
+
+<script>
+// Tabs
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+    document.querySelectorAll('.panel').forEach(function(p){p.hidden=p.id!==b.dataset.p});
+  });
+});
+// Grid demo
+var A=[0,0,1,0, 0,0,1,0, 0,1,1,1, 1,0,0,1, 1,0,0,1];
+var Af=[0,1,1,0, 0,1,1,0, 0,1,1,0, 1,0,0,1, 1,0,0,1];
+var B=[1,1,1,0, 0,1,0,1, 0,1,1,1, 0,1,0,1, 1,1,1,0];
+var M=A.slice();
+function draw(id,d,click){
+  var g=document.getElementById(id);g.innerHTML='';
+  d.forEach(function(v,i){
+    var s=document.createElement('span');s.textContent=v;if(v)s.className='on';
+    if(click)s.onclick=function(){M[i]=M[i]?0:1;render()};
+    g.appendChild(s);
+  });
+}
+function diff(a,b){return a.reduce(function(n,v,i){return n+(v!==b[i])},0)}
+function render(){
+  draw('gA',Af,false);draw('gB',B,false);draw('gM',M,true);
+  var da=diff(M,Af),db=diff(M,B);
+  document.getElementById('gres').textContent='Selisih dengan A: '+da+' | dengan B: '+db+' \u2192 '+(da===db?'seri, tidak bisa memutuskan':'dikenali sebagai '+(da<db?'A':'B'));
+}
+render();
+// Gaussian demo
+function pdf(x,m,s){return Math.exp(-0.5*Math.pow((x-m)/s,2))/(s*Math.sqrt(2*Math.PI))}
+function drawG(){
+  var d=+document.getElementById('dia').value,W=600,H=220,sx=function(x){return 30+(x-2)*(W-60)/10},sy=function(p){return H-30-p*(H-60)/0.38};
+  function path(m){var s='';for(var x=2;x<=12;x+=0.1){s+=(s?'L':'M')+sx(x).toFixed(1)+' '+sy(pdf(x,m,1.2)).toFixed(1)}return s}
+  var pj=pdf(d,6,1.2),pa=pdf(d,8.5,1.2);
+  document.getElementById('gs').innerHTML='<line x1="30" y1="'+(H-30)+'" x2="'+(W-20)+'" y2="'+(H-30)+'" stroke="#555"/>'
+   +'<path d="'+path(6)+'" fill="none" stroke="#e07b00" stroke-width="3"/><path d="'+path(8.5)+'" fill="none" stroke="#b3261e" stroke-width="3"/>'
+   +'<line x1="'+sx(d)+'" y1="20" x2="'+sx(d)+'" y2="'+(H-30)+'" stroke="#14206b" stroke-dasharray="5"/>'
+   +'<text x="'+sx(6)+'" y="25" fill="#e07b00" font-size="13" text-anchor="middle">jeruk</text><text x="'+sx(8.5)+'" y="25" fill="#b3261e" font-size="13" text-anchor="middle">apel</text>'
+   +'<text x="'+(W/2)+'" y="'+(H-8)+'" font-size="12" text-anchor="middle" fill="#555">diameter (cm)</text>';
+  document.getElementById('gsr').textContent='Diameter '+d.toFixed(1)+' cm: p(d|jeruk)='+pj.toFixed(3)+', p(d|apel)='+pa.toFixed(3)+' \u2192 '+(Math.abs(pj-pa)<0.005?'hampir seri, sangat tidak pasti':(pj>pa?'jeruk':'apel'));
+}
+document.getElementById('dia').addEventListener('input',drawG);drawG();
+// Quiz
+var Q=[
+['Sistem menemukan lokasi wajah di foto tanpa tahu identitasnya. Ini masalah...',['Detection','Identification','Clustering'],0,'Detection hanya menjawab "ada atau tidak, dan di mana".'],
+['Foto dikelompokkan tanpa label yang diberikan sebelumnya. Ini...',['Classification','Clustering','Verification'],1,'Label tidak diketahui, kelompok dibentuk dari kemiripan: clustering (unsupervised).'],
+['Hidden state y pada konsep dasar PR adalah...',['Fitur yang diukur','Kelas sebenarnya yang tidak terukur langsung','Bobot jaringan'],1,'Fitur x diukur; y (kelas) disimpulkan oleh classifier q: X \u2192 Y.'],
+['Fitur yang baik sebaiknya...',['Banyak dan saling berkorelasi','Membedakan, robust, sedikit, tidak berkorelasi','Hanya satu fitur apa pun'],1,'Fitur berkorelasi menambah beban tanpa informasi baru.'],
+['Pada demo grid, selisih A\u2013A = 3 dan A\u2013B = 10. Keputusan yang benar:',['Kelas B','Kelas A','Tidak bisa diputuskan'],1,'Selisih terkecil = paling mirip \u2192 kelas A.'],
+['Pendekatan yang memakai grammar dan primitif adalah...',['Template matching','Statistical','Syntactic/structural'],2,'Primitif dan aturan produksi adalah ciri pendekatan sintaktik.'],
+['Batas keputusan yang sangat berliku pas ke data latih berisiko...',['Underfitting','Overfitting','Normalisasi'],1,'Model menghafal noise sehingga buruk pada data baru.'],
+['Output 10 kelas dengan kode biner butuh minimal n node, di mana n =',['3','4','10'],1,'2^4 = 16 \u2265 10, sedangkan 2^3 = 8 < 10.']
+];
+var ans=[];
+function buildQuiz(){
+  var el=document.getElementById('quiz');el.innerHTML='';ans=[];document.getElementById('score').textContent='';
+  Q.forEach(function(q,i){
+    var d=document.createElement('div');d.className='q';
+    d.innerHTML='<b>'+(i+1)+'. '+q[0]+'</b>';
+    q[1].forEach(function(o,j){
+      var l=document.createElement('label');
+      l.innerHTML='<input type="radio" name="q'+i+'"> '+o;
+      l.querySelector('input').onchange=function(){pick(i,j,d)};
+      d.appendChild(l);
+    });
+    var f=document.createElement('div');f.className='fb';d.appendChild(f);el.appendChild(d);
+  });
+}
+function pick(i,j,d){
+  if(ans[i]!==undefined)return;
+  ans[i]=j;var ok=j===Q[i][2];
+  d.querySelector('.fb').innerHTML=(ok?'<span class="ok">Benar.</span> ':'<span class="no">Belum tepat.</span> ')+Q[i][3];
+  d.querySelectorAll('input').forEach(function(x){x.disabled=true});
+  var n=ans.filter(function(a){return a!==undefined}).length;
+  var sc=ans.reduce(function(s,a,k){return s+(a===Q[k][2])},0);
+  document.getElementById('score').textContent='Skor: '+sc+'/'+Q.length+' ('+n+' terjawab)';
+}
+document.getElementById('reset').onclick=buildQuiz;buildQuiz();
+</script>
+</body>
+</html>
